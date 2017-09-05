@@ -1,0 +1,12 @@
+.mainTemplate{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.logo-wrap{
+  font-weight: 700;
+  font-size: 2rem;
+  color:#58d5cc;
+  text-decoration: none;
+}

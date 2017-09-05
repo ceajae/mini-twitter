@@ -1,0 +1,11 @@
+.menus{
+  list-style-type: none;
+}
+.menus a{
+  text-decoration: none;
+  color:#737A78;
+  transition: color 0.25s ease-in-out;
+}
+.menus a:hover{
+  color:#62BAA1;
+}

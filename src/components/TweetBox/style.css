@@ -1,0 +1,52 @@
+.tweetBox-wrap{
+  width:100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color:#f6f6f6;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.09);
+  border-radius: 4px;
+  overflow: hidden;
+
+}
+
+.tweetBox-wrap header{
+   padding:15px;
+   background: #fefefe;
+   color:#58d5cc;
+   font-weight: 700;
+   font-size: 18px;
+   text-align: center;
+   border-bottom: 1px solid #ededed;
+}
+
+.tweetBox{
+  padding:15px;
+}
+
+.tweetBox footer{
+  text-align: right;
+}
+.tweetBox .tweet-count{
+  margin-right: 15px;
+  color:#888888;
+}
+
+.tweetInput{
+  padding:15px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.tweetInput:focus{
+  outline:none;
+  border: 2px solid #58d5cc;
+  transition: border-color 0.4s ease-in-out
+}
+
+.tweetInput::placeholder{
+  color:#d2d2d2;
+}
