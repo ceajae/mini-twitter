@@ -5,6 +5,9 @@
   justify-content: flex-start;
 }
 .logo-wrap{
+  flex:1;
+}
+.logo-wrap a{
   font-weight: 700;
   font-size: 2rem;
   color:#58d5cc;

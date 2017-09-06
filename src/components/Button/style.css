@@ -13,3 +13,11 @@
   background-color: #018b81;
   cursor: pointer;
 }
+
+.button-disabled{
+  background-color: #9BC6C3;
+}
+.button-disabled:hover{
+  background-color: #9BC6C3;
+  cursor:no-drop;
+}

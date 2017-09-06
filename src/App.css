@@ -25,3 +25,13 @@ html,body, #root,.appBody{
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.text-color-warning{
+  color:#661D00;
+}
+.text-color-danger{
+  color:#DF1414;
+}
+.text-color-default{
+  color:#5E5E5E;
+}

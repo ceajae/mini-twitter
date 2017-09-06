@@ -5,6 +5,7 @@ import Header from '../../../components/Header/';
 import Content from '../../../components/Content/';
 import Menu from '../../../components/Menu/';
 import TweetBox from '../../../components/TweetBox/';
+import Button from '../../../components/Button';
 import MainContainer from './container';
 
 
@@ -12,20 +13,45 @@ import MainContainer from './container';
     return (
        <div className='mainTemplate'>
           <Header>
-             <Link to='/' className='logo-wrap'>
-               Paroter
-             </Link>
+              <div className='logo-wrap'>
+                <Link to='/'>
+                  Paroter
+                </Link>
+              </div>
 
+            <Button text='Talk Am'
+                    onClick={_handleOpenTweetBox}/>
              <Menu />
+
 
           </Header>
 
           <Content>
-            <TweetBox count={props.count}/>
+           {
+             props.tweetBoxVisible
+             && <TweetBox count={props.count}
+                          onUpdateTweet ={_handleUpdateTweet}
+                          onSubmitTweet={_handleSubmitTweet}/>
+           }
+
             {props.children}
           </Content>
        </div>
     );
+
+    function _handleUpdateTweet(event){
+       props.updateTweet(event.target.value)
+    }
+    function _handleSubmitTweet(event){
+        console.log('i am tweeting')
+    }
+    function _handleOpenTweetBox(){
+       props.toggleTweetBoxVisibility(true);
+
+    }
+    function _handleCloseTweetBox(){
+
+    }
 
 }
 

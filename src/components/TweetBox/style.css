@@ -28,7 +28,6 @@
 }
 .tweetBox .tweet-count{
   margin-right: 15px;
-  color:#888888;
 }
 
 .tweetInput{
@@ -39,6 +38,8 @@
   border: 1px solid #ededed;
   border-radius: 4px;
   margin-bottom: 15px;
+  overflow: hidden;
+  resize:none;
 }
 
 .tweetInput:focus{
