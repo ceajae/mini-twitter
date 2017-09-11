@@ -6,10 +6,11 @@ import {addPost} from '../../../actions/postActions';
 function mapStateToProps(state, ownProps){
   return{
      count:state.tweet.count,
+     tweetValue:state.tweet.text,
      tweetBoxVisible:state.tweet.tweetBoxVisible,
      modalVisible: state.modal.visibility,
      posts:state.posts.posts,
-     tweetValue:state.tweet.text
+
   }
 }
 
@@ -18,9 +19,9 @@ function mapDispatchToProps(dispatch){
       updateTweet:(value)=> dispatch(updateTweet(value)),
       toggleTweetBoxVisibility:(value)=> dispatch(toggleTweetBoxVisibility(value)),
       toggleModalVisibility:(value)=> dispatch(toggleModalVisibility(value)),
-      postTweet:(value, postId,userId,timeStamp)=> dispatch(addPost(value,postId,userId, timeStamp))
-
+      postTweet: (value)=> dispatch(addPost(value)),
+  }
  }
-}
+
 
 export default connect(mapStateToProps, mapDispatchToProps);

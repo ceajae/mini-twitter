@@ -20,9 +20,11 @@ export default function TweetBox(props){
         <header>Compose Am Jare</header>
         <div className='tweetBox'>
             <textArea type='text'
+                      value={props.tweetValue}
                       className='tweetInput'
                       onChange={props.onUpdateTweet}
-                      placeholder='Whatagwan Mwan!' />
+                      placeholder='Whatagwan Mwan!'
+                       />
             <footer>
                 <span className={`tweet-count ${getCountClass(props.count)}`}>{140- props.count}</span>
                 <Button text='Parot'

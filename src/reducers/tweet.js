@@ -1,4 +1,4 @@
-import {UPDATE_TWEET,TOGGLE_TWEET_BOX_VISIBILITY} from '../constants/actionTypes';
+import {ADD_POST,UPDATE_TWEET,TOGGLE_TWEET_BOX_VISIBILITY} from '../constants/actionTypes';
 
 
 
@@ -26,6 +26,15 @@ function tweet(state= initialState, action){
           ...state,
           tweetBoxVisible:payload.value
         }
+         break;
+
+       case ADD_POST:
+         return{
+           ...state,
+           text:'',
+           count:0
+         }
+         break;
 
       default:
       return state;

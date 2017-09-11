@@ -1,0 +1,49 @@
+.home-wrap{
+  /*background-color: yellow;*/
+  display: flex;
+  justify-content: center;
+}
+.post-container{
+  width:500px;
+}
+.post-wrap{
+  display: flex;
+  background-color: #fefefe;
+  margin: 2px;
+  padding:12px;
+  min-height: 100px;
+  box-shadow: 0.1px 1px 1px 1px rgba(0,0,0,0.1);
+
+
+}
+.post-avatar{
+  /*background-color: green;*/
+  width:100px;
+  text-align:center;
+  font-size: 50px;
+}
+.post-text-wrap{
+  display: flex;
+  flex-direction: column;
+  /*background-color: blue;*/
+  max-width:400px;
+}
+.post-username{
+   margin:5px;
+   height:20px;
+}
+.post-username span{
+  color:#737A78;
+  font-size: 11px;
+}
+.post-text{
+  margin: 5px;
+  min-height:40px;
+  font-size: 13px;
+  word-wrap: break-word;
+}
+.post-retweet{
+  margin:5px;
+  height:16px;
+  font-size: 14px;
+}

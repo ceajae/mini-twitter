@@ -7,6 +7,8 @@ import Menu from '../../../components/Menu/';
 import TweetBox from '../../../components/TweetBox/';
 import Button from '../../../components/Button';
 import MainContainer from './container';
+import Modal from '../../../components/Modal';
+
 
 
  function Main(props) {
@@ -28,10 +30,13 @@ import MainContainer from './container';
 
           <Content>
            {
-             props.tweetBoxVisible
-             && <TweetBox count={props.count}
-                          onUpdateTweet ={_handleUpdateTweet}
-                          onSubmitTweet={_handleSubmitTweet}/>
+              <Modal  visible={props.modalVisible}
+                       onClose={_handleCloseModal}>
+                   <TweetBox count={props.count}
+                                onUpdateTweet ={_handleUpdateTweet}
+                                onSubmitTweet={_handleSubmitTweet}
+                                tweetValue={props.tweetValue}/>
+                </Modal>
            }
 
             {props.children}
@@ -39,18 +44,45 @@ import MainContainer from './container';
        </div>
     );
 
+
     function _handleUpdateTweet(event){
        props.updateTweet(event.target.value)
     }
-    function _handleSubmitTweet(event){
-        console.log('i am tweeting')
-    }
-    function _handleOpenTweetBox(){
-       props.toggleTweetBoxVisibility(true);
+
+    function _handleSubmitTweet(){
+            function generateId(){
+              const time =  Date.now().toString().split('');
+              let randomizer, letter, id='';
+
+              const alphaCodex=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+            //  const numCodex=['0','1','2','3','4','5','6','7','8','9'];
+
+              for(var i=0; i<time.length; i++){
+                randomizer = Math.floor(Math.random()*10);
+                letter = alphaCodex[ Math.floor((alphaCodex.length * randomizer)/10)];
+              //  console.log(letter);
+                id+=letter;
+              }
+
+               return id;
+
+            }
+        props.postTweet(props.tweetValue, generateId());
+        props.toggleModalVisibility(false);
 
     }
+
+    function _handleOpenTweetBox(){
+       props.toggleModalVisibility(true);
+
+    }
+
     function _handleCloseTweetBox(){
 
+    }
+
+    function _handleCloseModal(){
+      props.toggleModalVisibility(false);
     }
 
 }
