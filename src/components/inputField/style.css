@@ -1,0 +1,14 @@
+.inputField-wrap{
+   margin-bottom: 15px;
+}
+.inputField-wrap label{
+   margin-bottom: 15px;
+   display: block;
+}
+
+.inputField-wrap input{
+    box-sizing: border-box;
+    padding:15px;
+    width: 100%;
+    font-size: 16px;
+}
