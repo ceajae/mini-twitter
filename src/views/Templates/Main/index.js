@@ -8,6 +8,7 @@ import TweetBox from '../../../components/TweetBox/';
 import Button from '../../../components/Button';
 import MainContainer from './container';
 import Modal from '../../../components/Modal';
+//import request from '../../../constants/httpRequest'
 
 
 
@@ -77,7 +78,7 @@ import Modal from '../../../components/Modal';
         request.open('POST', 'http://localhost:3030/tweet', true);
         request.addEventListener('load', ()=>{
           const response = request.responseText;
-          console.log(response);
+          //console.log(response);
           props.postTweet(response);
         })
         request.send(stringPost);

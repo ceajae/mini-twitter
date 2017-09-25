@@ -1,0 +1,20 @@
+.profile-wrap{
+  box-sizing: border-box;
+  max-width: 600px;
+  background-color: #fcfcfc;
+  margin:0 auto;
+}
+.profile-header{
+  width: 600px;
+  height: 53px;
+  border-bottom: 1px solid #efefef;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.profile-form{
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+}

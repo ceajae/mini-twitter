@@ -7,15 +7,16 @@
   width: 100%;
 }
 
-.signUpHeader{
+.loginHeader{
   margin: 0 auto;
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 20px;
+  font-size: 40px;
+  margin-bottom: 40px;
   color: #00a99d;
   font-weight: bold;
 }
-.signUpForm{
+
+.loginForm{
   box-sizing: border-box;
   max-width: 300px;
   background-color: #fcfcfc;
@@ -25,9 +26,5 @@
   border-radius: 20px;
 }
 .signInLink{
-  margin: 0 auto;
-  text-align: center;
-}
-.signInLink a{
-    text-decoration: none;
+  margin:0 auto;
 }

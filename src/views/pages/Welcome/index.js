@@ -5,6 +5,7 @@ import container from './container';
 
 import InputField from '../../../components/inputField/';
 import Button from '../../../components/Button/';
+import handleUpdateField from '../../../constants/handleUpdateField';
 
 class Welcome extends Component{
 
@@ -13,23 +14,27 @@ class Welcome extends Component{
       return(
          <div className='welcomePage'>
 
-              <h2 className='appTitle'>Welcome to Parot</h2>
+              <div className='signUpHeader'>Welcome to Parot</div>
 
               <div className='signUpForm'>
 
+                   <InputField label='Email'
+                               onChange={handleUpdateField.bind(this, 'email')}
+                               value={formValues.email}/>
                    <InputField label='Username'
-                               onChange={this._handleUpdateField.bind(this, 'username')}
+                               onChange={handleUpdateField.bind(this, 'username')}
                                value={formValues.username}/>
                    <InputField label='Password'
-                               onChange={this._handleUpdateField.bind(this, 'password')}
+                               onChange={handleUpdateField.bind(this, 'password')}
                                value={formValues.password}/>
 
-                   <Button text='Create Account' onClick={this._handleCreateAccount}/>
+                   <Button text='Create Account' onClick={this._handleCreateAccount.bind(this)}/>
 
-                   <div className='signInLink'>
-                       <label>Already Signed Up?</label>
-                       <Link to='signIn' >Sign In</Link>
-                   </div>
+
+              </div>
+              <div className='signInLink'>
+                  <label>Already Signed Up?</label>
+                  <Link to='login' >Sign In</Link>
               </div>
 
 
@@ -37,12 +42,23 @@ class Welcome extends Component{
       );
     }
 
-    _handleUpdateField(name, event){
-      this.props.updateFormField(name, event.target.value);
-    }
+    // _handleUpdateField(name, event){
+    //   this.props.updateFormField(name, event.target.value);
+    // }
 
     _handleCreateAccount(event){
+       const stringSignUpDetails = JSON.stringify({
+           ...this.props.formValues
+       })
 
+       const request = new XMLHttpRequest();
+
+       request.open('POST', 'http://localhost:3030/users', true);
+       request.addEventListener('load', ()=>{
+           const response = request.responseText;
+           this.props.addUser(response);
+       })
+       request.send(stringSignUpDetails)
     }
 }
 

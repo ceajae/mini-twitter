@@ -5,16 +5,16 @@ import container from './container';
 import InputField from '../../../components/inputField/';
 import Button from '../../../components/Button/';
 
-class Welcome extends Component{
+class Login extends Component{
 
     render(){
       const {formValues}=this.props;
       return(
          <div className='welcomePage'>
 
-              <h2 className='appTitle'>Welcome to Parot</h2>
+              <div className='loginHeader'>Welcome to Parot</div>
 
-              <div className='signUpForm'>
+              <div className='loginForm'>
 
                    <InputField label='Username'
                                onChange={this._handleUpdateField.bind(this, 'username')}
@@ -39,4 +39,4 @@ class Welcome extends Component{
     }
 }
 
-export default container(Welcome)
+export default container(Login)

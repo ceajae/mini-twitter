@@ -7,13 +7,13 @@ import Content from './components/Content/';
 import Home from './views/pages/Home/';
 import Profile from './views/pages/Profile/';
 import Welcome from './views/pages/Welcome';
-import SignIn from './views/pages/SignIn';
+import Login from './views/pages/Login';
 class App extends Component {
   render() {
     return (
        <div className='appBody'>
           <Route path='/welcome' component={Welcome}/>
-          <Route path='/signIn'  component={SignIn}/>
+          <Route path='/login'  component={Login}/>
           <Route path ='/' component={Home} exact/>
           <Route path ='/profile' component={Profile} exact/>
        </div>

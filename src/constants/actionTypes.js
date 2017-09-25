@@ -5,3 +5,5 @@ export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = ' DELETE_POST';
 export const UPDATE_FORM_FIELD = 'UPDATE_FORM_FIELD';
 export const ADD_FIELD_ERROR ='ADD_FIELD_ERROR';
+export const ADD_USER ='ADD_USER';
+export const LOAD_SAVED_VALUES = 'LOAD_SAVED_VALUES'

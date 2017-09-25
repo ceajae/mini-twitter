@@ -1,18 +1,19 @@
 import {connect } from 'react-redux';
 import {updateFormField } from '../../../actions/formActions';
 import {addFieldError} from '../../../actions/formActions';
-import {addUser} from '../../../actions/userActions'
+import {loadSavedValues} from '../../../actions/formActions'
 
 function mapStateToProps(state, ownProps){
   return{
      modalVisible: state.modal.visibility,
-     formValues: state.form.values
+     formValues: state.form.values,
+     //user:state.users.users
   }
 }
 
 function mapDispatchToProps(dispatch){
   return{
-      addUser:(userDetails)=> dispatch(addUser(userDetails)),
+      loadSavedValues:(values)=> dispatch(loadSavedValues(values)),
       addFieldError:(name,value)=>dispatch(addFieldError(name, value)),
       updateFormField:(name, value)=>dispatch(updateFormField(name, value))
   }

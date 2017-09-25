@@ -1,4 +1,4 @@
-import {UPDATE_FORM_FIELD, ADD_FIELD_ERROR} from '../constants/actionTypes';
+import {UPDATE_FORM_FIELD, ADD_FIELD_ERROR, LOAD_SAVED_VALUES} from '../constants/actionTypes';
 
 export function updateFormField(name , value){
   return{
@@ -18,4 +18,15 @@ export function addFieldError(name, value){
       value
     }
 }
+}
+
+export function loadSavedValues(values){
+  const valuesObj = JSON.parse(values)
+
+   return {
+     type: LOAD_SAVED_VALUES,
+     payload:{
+        valuesObj
+     }
+   }
 }
