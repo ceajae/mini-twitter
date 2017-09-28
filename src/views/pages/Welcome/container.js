@@ -1,7 +1,9 @@
 import {connect } from 'react-redux';
 import {updateFormField } from '../../../actions/formActions';
 import {addFieldError} from '../../../actions/formActions';
-import {addUser} from '../../../actions/userActions'
+import {clearFormField} from '../../../actions/formActions';
+
+
 
 function mapStateToProps(state, ownProps){
   return{
@@ -12,8 +14,8 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return{
-      addUser:(userDetails)=> dispatch(addUser(userDetails)),
       addFieldError:(name,value)=>dispatch(addFieldError(name, value)),
+      clearFormField:()=> dispatch(clearFormField()),
       updateFormField:(name, value)=>dispatch(updateFormField(name, value))
   }
  }

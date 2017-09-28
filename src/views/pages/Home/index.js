@@ -14,6 +14,7 @@ class Home extends Component {
     super(props);
   }
   render() {
+    console.log(this.props.location)
     const{posts} = this.props;
     const postArray =[];
     for (var post in posts){

@@ -1,4 +1,8 @@
-import {UPDATE_FORM_FIELD, ADD_FIELD_ERROR, LOAD_SAVED_VALUES} from '../constants/actionTypes';
+import {UPDATE_FORM_FIELD,
+        ADD_FIELD_ERROR,
+        LOAD_SAVED_VALUES,
+        CLEAR_FORM_FIELD} from '../constants/actionTypes';
+
 
 export function updateFormField(name , value){
   return{
@@ -29,4 +33,10 @@ export function loadSavedValues(values){
         valuesObj
      }
    }
+}
+
+export function clearFormField(){
+  return {
+    type: CLEAR_FORM_FIELD
+  }
 }

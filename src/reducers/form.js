@@ -1,4 +1,7 @@
-import {UPDATE_FORM_FIELD, ADD_FIELD_ERROR, LOAD_SAVED_VALUES} from '../constants/actionTypes';
+import {UPDATE_FORM_FIELD,
+        ADD_FIELD_ERROR,
+        LOAD_SAVED_VALUES,
+        CLEAR_FORM_FIELD} from '../constants/actionTypes';
 
 
 
@@ -46,8 +49,14 @@ function form(state=initialState, action){
             ...state,
             values: loadSavedValues(state.values, action.payload)
           }
-          console.log
 
+          break;
+
+      case CLEAR_FORM_FIELD:
+          return{
+            ...state,
+            values: initialState.values
+          }
           break;
 
       default:

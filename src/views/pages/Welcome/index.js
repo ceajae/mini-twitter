@@ -2,10 +2,15 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import './style.css';
 import container from './container';
-
+import firebase from '../../../configuration/firebase';
+import httpRequest from '../../../utilities/httpRequest';
 import InputField from '../../../components/inputField/';
 import Button from '../../../components/Button/';
-import handleUpdateField from '../../../constants/handleUpdateField';
+import handleUpdateField from '../../../utilities/handleUpdateField';
+
+import {createUserAccount} from '../../../services/firebase';
+
+
 
 class Welcome extends Component{
 
@@ -42,23 +47,39 @@ class Welcome extends Component{
       );
     }
 
-    // _handleUpdateField(name, event){
-    //   this.props.updateFormField(name, event.target.value);
-    // }
 
     _handleCreateAccount(event){
-       const stringSignUpDetails = JSON.stringify({
-           ...this.props.formValues
-       })
+           const {formValues, clearFormField} = this.props;
+           createUserAccount(formValues.email, formValues.password)
+           .then((user)=>{
+               const stringSignUpDetails = JSON.stringify(
+                 {
+                   ...formValues,
+                   email:  user.email
+                 })
 
-       const request = new XMLHttpRequest();
+                 httpRequest('POST','http://127.0.0.1:3030/users', stringSignUpDetails )
+                 .then(response => {
+                    console.log(response);
+                 })
 
-       request.open('POST', 'http://localhost:3030/users', true);
-       request.addEventListener('load', ()=>{
-           const response = request.responseText;
-           this.props.addUser(response);
-       })
-       request.send(stringSignUpDetails)
+                 clearFormField();
+
+               })
+
+           .catch((error)=>{
+                var errorCode = error.code;
+                var errorMessage = error.message;
+
+                if (errorCode == 'auth/weak-password'){
+                  alert('The password is too weak');
+                } else{
+                  alert(errorMessage);
+                }
+                console.log(error);
+           })
+
+
     }
 }
 

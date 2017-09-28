@@ -3,7 +3,7 @@ import tweet from './tweet';
 import modal from './modal';
 import posts from './posts';
 import form from './form';
-import users from './users';
+import user from './user';
 
 
 export default combineReducers({
@@ -11,5 +11,5 @@ export default combineReducers({
    modal,
    posts,
    form,
-   users
+   user
 })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './style.css';
 import Header from '../../../components/Header/';
 import Content from '../../../components/Content/';
@@ -8,49 +8,65 @@ import TweetBox from '../../../components/TweetBox/';
 import Button from '../../../components/Button';
 import MainContainer from './container';
 import Modal from '../../../components/Modal';
+import firebase from '../../../configuration/firebase';
 //import request from '../../../constants/httpRequest'
 
 
 
- function Main(props) {
-    return (
-       <div className='mainTemplate'>
-          <Header>
-              <div className='logo-wrap'>
-                <Link to='/'>
-                  Paroter
-                </Link>
-              </div>
+ class Main extends Component{
 
-            <Button text='Talk Am'
-                    onClick={_handleOpenTweetBox}/>
-             <Menu />
+  componentDidMount(){
+     firebase.auth().onAuthStateChanged((user) => {
+       if(user) {
+         this.props.addUser(user)
+       }else{
+          this.props.history.push('/login');
+       }
+     })
+   }
 
+   render() {
+         return (
+            <div className='mainTemplate'>
+               <Header>
+                   <div className='logo-wrap'>
+                     <Link to='/'>
+                       Paroter
+                     </Link>
+                   </div>
 
-          </Header>
-
-          <Content>
-           {
-              <Modal  visible={props.modalVisible}
-                       onClose={_handleCloseModal}>
-                   <TweetBox count={props.count}
-                                onUpdateTweet ={_handleUpdateTweet}
-                                onSubmitTweet={_handleSubmitTweet}
-                                tweetValue={props.tweetValue}/>
-                </Modal>
-           }
-
-            {props.children}
-          </Content>
-       </div>
-    );
+                 <Button text='Talk Am'
+                         onClick={this._handleOpenTweetBox.bind(this)}/>
+                  <Menu />
 
 
-    function _handleUpdateTweet(event){
-       props.updateTweet(event.target.value)
+               </Header>
+
+               <Content>
+                {
+                   <Modal  visible={this.props.modalVisible}
+                            onClose={this._handleCloseModal.bind(this)}>
+
+                        <TweetBox count={this.props.count}
+                                  onUpdateTweet ={this._handleUpdateTweet.bind(this)}
+                                  onSubmitTweet={this._handleSubmitTweet.bind(this)}
+                                  tweetValue={this.props.tweetValue}/>
+                   </Modal>
+                }
+
+                 {this.props.children}
+               </Content>
+            </div>
+         );
+   }
+
+
+
+    _handleUpdateTweet(event){
+       this.props.updateTweet(event.target.value)
     }
 
-    function _handleSubmitTweet(){
+    _handleSubmitTweet(){
         function generateId(){
             const time =  Date.now().toString().split('');
             let randomizer, letter, id='';
@@ -70,7 +86,7 @@ import Modal from '../../../components/Modal';
         }
 
         const stringPost = JSON.stringify({
-          text:props.tweetValue,
+          text:this.props.tweetValue,
           userId:generateId()
         });
 
@@ -79,29 +95,29 @@ import Modal from '../../../components/Modal';
         request.addEventListener('load', ()=>{
           const response = request.responseText;
           //console.log(response);
-          props.postTweet(response);
+          this.props.postTweet(response);
         })
         request.send(stringPost);
 
 
 
-        props.toggleModalVisibility(false);
+        this.props.toggleModalVisibility(false);
 
     }
 
-    function _handleOpenTweetBox(){
-       props.toggleModalVisibility(true);
+    _handleOpenTweetBox(){
+       this.props.toggleModalVisibility(true);
 
     }
 
-    function _handleCloseTweetBox(){
+    _handleCloseTweetBox(){
 
     }
 
-    function _handleCloseModal(){
-      props.toggleModalVisibility(false);
+    _handleCloseModal(){
+      this.props.toggleModalVisibility(false);
     }
 
 }
 
-export default MainContainer(Main);
+export default withRouter(MainContainer(Main));

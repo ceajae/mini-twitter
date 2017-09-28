@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './style.css';
 import Main from '../../Templates/Main/';
 import InputField from '../../../components/inputField/';
 import container from './container';
-import handleUpdateField from '../../../constants/handleUpdateField';
-import updateUserProfile from '../../../constants/updateUserProfile';
+import handleUpdateField from '../../../utilities/handleUpdateField';
 import Button from '../../../components/Button/';
+import httpRequest from '../../../utilities/httpRequest';
+
 
 class Profile extends Component {
 
   componentWillMount(){
-      const request = new XMLHttpRequest();
 
-      request.open('GET', 'http://127.0.0.1:3030/users', true);
-      request.addEventListener('load', ()=>{
-          const response = request.responseText;
-          this.props.loadSavedValues(response);
-          console.log(response)
-      })
-      request.send();
+    httpRequest('GET','http://127.0.0.1:3030/users')
+    .then( (response) => {
+       this.props.loadSavedValues(response);
+    })
   }
 
   render() {
@@ -53,12 +49,23 @@ class Profile extends Component {
                                     value={formValues.password}/>
 
                         <Button text='Save'
-                                 onClick={updateUserProfile.bind(this)}/>
+                                 onClick={this._handleUpdateUserProfile.bind(this)}/>
                   </form>
               </div>
                </div>
        </Main>
     );
   }
+
+  _handleUpdateUserProfile(){
+
+      const stringUserProfile = JSON.stringify({
+            ...this.props.formValues
+      })
+
+      httpRequest('POST','http://127.0.0.1:3030/users', stringUserProfile )
+  }
+
 }
+
 export default container(Profile)
