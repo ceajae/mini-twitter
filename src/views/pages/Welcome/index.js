@@ -23,6 +23,9 @@ class Welcome extends Component{
 
               <div className='signUpForm'>
 
+                   <InputField label='Fullname'
+                               onChange={handleUpdateField.bind(this, 'fullname')}
+                               value={formValues.fullname}/>
                    <InputField label='Email'
                                onChange={handleUpdateField.bind(this, 'email')}
                                value={formValues.email}/>
@@ -52,6 +55,11 @@ class Welcome extends Component{
            const {formValues, clearFormField} = this.props;
            createUserAccount(formValues.email, formValues.password)
            .then((user)=>{
+               user.updateProfile({
+                 displayName: formValues.fullname,
+                 username: formValues.username
+               })
+               console.log(user)
                const stringSignUpDetails = JSON.stringify(
                  {
                    ...formValues,
@@ -65,9 +73,8 @@ class Welcome extends Component{
 
                  clearFormField();
 
-               })
-
-           .catch((error)=>{
+              })
+            .catch((error)=>{
                 var errorCode = error.code;
                 var errorMessage = error.message;
 

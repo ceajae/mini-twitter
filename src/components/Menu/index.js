@@ -8,7 +8,7 @@ export default function Menu(props){
     <div className='menu-wrap'>
        <ul className='menus'>
           <li>
-            <Link to='profile'>My Profile</Link>
+            <Link to='profile'>{props.label}</Link>
           </li>
        </ul>
     </div>

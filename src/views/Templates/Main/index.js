@@ -18,6 +18,7 @@ import firebase from '../../../configuration/firebase';
   componentDidMount(){
      firebase.auth().onAuthStateChanged((user) => {
        if(user) {
+         console.log(user)
          this.props.addUser(user)
        }else{
           this.props.history.push('/login');
@@ -26,31 +27,32 @@ import firebase from '../../../configuration/firebase';
    }
 
    render() {
+
+      const { user, tweetValue, modalVisible, count} = this.props;
          return (
             <div className='mainTemplate'>
                <Header>
                    <div className='logo-wrap'>
-                     <Link to='/'>
-                       Paroter
-                     </Link>
+                         <Link to='/'>
+                           Paroter
+                         </Link>
                    </div>
 
-                 <Button text='Talk Am'
-                         onClick={this._handleOpenTweetBox.bind(this)}/>
-                  <Menu />
-
+                   <Button text='Talk Am'
+                           onClick={this._handleOpenTweetBox.bind(this)}/>
+                   <Menu label= {user.displayName} />
 
                </Header>
 
                <Content>
                 {
-                   <Modal  visible={this.props.modalVisible}
+                   <Modal  visible={modalVisible}
                             onClose={this._handleCloseModal.bind(this)}>
 
-                        <TweetBox count={this.props.count}
+                        <TweetBox count={count}
                                   onUpdateTweet ={this._handleUpdateTweet.bind(this)}
                                   onSubmitTweet={this._handleSubmitTweet.bind(this)}
-                                  tweetValue={this.props.tweetValue}/>
+                                  tweetValue={tweetValue}/>
                    </Modal>
                 }
 
