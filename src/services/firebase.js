@@ -33,3 +33,20 @@ export function signInUser (email, password) {
 
   })
 }
+
+export function signOutUser (){
+   return new Promise ((resolve, reject) => {
+     try{
+       firebase.auth().signOut()
+        .then( ()=>{
+           console.log('signed out')
+           resolve()
+        })
+        .catch( error =>{
+          reject(error)
+        })
+     }catch(error){
+       reject(error)
+     }
+   })
+}

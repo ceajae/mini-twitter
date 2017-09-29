@@ -8,6 +8,7 @@ import Home from './views/pages/Home/';
 import Profile from './views/pages/Profile/';
 import Welcome from './views/pages/Welcome';
 import Login from './views/pages/Login';
+
 class App extends Component {
   render() {
     return (

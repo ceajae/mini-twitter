@@ -8,7 +8,9 @@ import TweetBox from '../../../components/TweetBox/';
 import Button from '../../../components/Button';
 import MainContainer from './container';
 import Modal from '../../../components/Modal';
+
 import firebase from '../../../configuration/firebase';
+import {signOutUser} from '../../../services/firebase';
 //import request from '../../../constants/httpRequest'
 
 
@@ -40,7 +42,7 @@ import firebase from '../../../configuration/firebase';
 
                    <Button text='Talk Am'
                            onClick={this._handleOpenTweetBox.bind(this)}/>
-                   <Menu label= {user.displayName} />
+                   <Menu label= {user.displayName} signOut= {signOutUser} />
 
                </Header>
 

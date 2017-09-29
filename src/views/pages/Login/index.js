@@ -40,6 +40,7 @@ class Login extends Component{
        const{ formValues, addUser } = this.props;
        signInUser(formValues.email, formValues.password)
          .then( (user) => {
+             this.props.history.push('/')
              addUser(user)
          })
          .catch((error)=>{

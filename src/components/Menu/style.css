@@ -1,5 +1,6 @@
 .menus{
   list-style-type: none;
+  /*text-align: center;*/
 }
 .menus a{
   text-decoration: none;
@@ -8,4 +9,27 @@
 }
 .menus a:hover{
   color:#62BAA1;
+}
+.menus li{
+  padding:10px;
+}
+
+.dropdown{
+  position: relative;
+  display: inline-block;
+  margin-left: 60px;
+  margin-right: 40px;
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: #fefefe;
+  min-width: 140px;
+  margin-left: -40px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.2);
+}
+.dropdown:hover .dropdown-content{
+  display: block;
 }
