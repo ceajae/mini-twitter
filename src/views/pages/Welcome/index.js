@@ -63,12 +63,13 @@ class Welcome extends Component{
                const stringSignUpDetails = JSON.stringify(
                  {
                    ...formValues,
-                   email:  user.email
+                   email:  user.email,
+                   userId: user.uid
                  })
 
                  httpRequest('POST','http://127.0.0.1:3030/users', stringSignUpDetails )
                  .then(response => {
-                    console.log(response);
+                    console.log(response)
                  })
 
                  clearFormField();
@@ -83,7 +84,6 @@ class Welcome extends Component{
                 } else{
                   alert(errorMessage);
                 }
-                console.log(error);
            })
 
 

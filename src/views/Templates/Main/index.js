@@ -11,7 +11,7 @@ import Modal from '../../../components/Modal';
 
 import firebase from '../../../configuration/firebase';
 import {signOutUser} from '../../../services/firebase';
-//import request from '../../../constants/httpRequest'
+import httpRequest from '../../../utilities/httpRequest'
 
 
 
@@ -91,18 +91,17 @@ import {signOutUser} from '../../../services/firebase';
 
         const stringPost = JSON.stringify({
           text:this.props.tweetValue,
-          userId:generateId()
+          userId: this.props.user.uid
         });
 
-        const request = new XMLHttpRequest();
-        request.open('POST', 'http://localhost:3030/tweet', true);
-        request.addEventListener('load', ()=>{
-          const response = request.responseText;
-          //console.log(response);
-          this.props.postTweet(response);
-        })
-        request.send(stringPost);
-
+        httpRequest('POST','http://localhost:3030/tweet', stringPost)
+         .then( response => {
+            console.log(response)
+            this.props.postTweet(response);
+         })
+         .catch(error =>{
+            alert(error.code)
+         })
 
 
         this.props.toggleModalVisibility(false);

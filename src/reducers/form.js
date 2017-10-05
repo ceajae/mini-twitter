@@ -18,7 +18,6 @@ function updateValue(values, payload){
 }
 
 function loadSavedValues(values, payload){
-  console.log(payload.valuesObj)
   return{
     ...values,
     ...payload.valuesObj

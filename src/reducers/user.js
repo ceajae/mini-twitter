@@ -4,19 +4,16 @@ const initialState={
    user:{}
 }
 
-
-
 export default function User(state = initialState, action){
 
   switch(action.type){
 
     case ADD_USER:
-         console.log(action.payload.user)
+        console.log(action.payload.user)
         return{
-            ...state,
+             ...state,
              user: action.payload.user
             }
-        console.log(action.payload.user)
       break;
     default:
       return state;

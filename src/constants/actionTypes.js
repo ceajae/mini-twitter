@@ -8,3 +8,4 @@ export const ADD_FIELD_ERROR ='ADD_FIELD_ERROR';
 export const ADD_USER ='ADD_USER';
 export const LOAD_SAVED_VALUES = 'LOAD_SAVED_VALUES';
 export const CLEAR_FORM_FIELD = 'CLEAR_FORM_FIELD';
+export const LOAD_SAVED_POSTS = 'LOAD_SAVED_POSTS';

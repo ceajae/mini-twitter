@@ -1,8 +1,8 @@
-import{ADD_POST, DELETE_POST} from '../constants/actionTypes';
+import{ADD_POST, DELETE_POST, LOAD_SAVED_POSTS} from '../constants/actionTypes';
 const posts={
   post:{
      text:'',
-     userId:'hhgfffjvv',
+     userId:'',
      replies:[],
      likes:0,
      retweets:0,
@@ -10,6 +10,7 @@ const posts={
 }
 
 function addPost(posts, post){
+
   const {text,postId,userId,timeStamp}= post
    return {
 
@@ -38,11 +39,21 @@ const initialState ={
 export default function Posts(state = initialState, action){
   switch(action.type){
     case ADD_POST:
+        console.log(action.payload)
         return{
                posts: addPost(state.posts, action.payload)
             }
 
       break;
+
+      case LOAD_SAVED_POSTS:
+          console.log(action.payload)
+          return{
+                 posts: addPost(state.posts, action.payload)
+              }
+
+        break;
+
     case DELETE_POST:
        return{
               posts:deletePost(state.posts, action.payload.postId)

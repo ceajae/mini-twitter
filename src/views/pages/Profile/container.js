@@ -7,7 +7,7 @@ function mapStateToProps(state, ownProps){
   return{
      modalVisible: state.modal.visibility,
      formValues: state.form.values,
-     //user:state.users.users
+    
   }
 }
 

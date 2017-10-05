@@ -12,7 +12,7 @@ class Profile extends Component {
 
   componentWillMount(){
 
-    httpRequest('GET','http://127.0.0.1:3030/users')
+    httpRequest('GET','http://localhost:3030/users')
     .then( (response) => {
        this.props.loadSavedValues(response);
     })
@@ -20,7 +20,6 @@ class Profile extends Component {
 
   render() {
       const {formValues}=this.props;
-      console.log(formValues)
 
     return (
        <Main>

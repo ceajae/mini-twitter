@@ -21,8 +21,8 @@ export function signInUser (email, password) {
   return new Promise ((resolve, reject) => {
     try{
        firebase.auth().signInWithEmailAndPassword(email, password)
-         .then( user =>{
-            resolve(user)
+         .then( authdUser =>{
+            resolve(authdUser)
          })
          .catch(error =>{
            reject(error)
@@ -49,4 +49,24 @@ export function signOutUser (){
        reject(error)
      }
    })
+}
+
+export function getSignedInUser(){
+  return new Promise ((resolve, reject) => {
+    try{
+      firebase.auth().onAuthStateChanged(function(user) {
+         console.log(user)
+         if (user) {
+            resolve(user)
+         }
+         else {
+           reject(user)// No user is signed in.
+         }
+     });
+
+    }catch(error){
+      reject(error)
+    }
+
+  })
 }
