@@ -20,7 +20,7 @@ export default function Menu(props){
                  <Link to='profile'>Profile</Link>
                </li>
                <li>
-                 <a href="#" onClick= {props.signOut}>Sign Out</a>
+                 <a href="" onClick= {props.signOut}>Sign Out</a>
                </li>
             </ul>
          </div>

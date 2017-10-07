@@ -8,6 +8,7 @@ import Button from '../../../components/Button/';
 import handleUpdateField from '../../../utilities/handleUpdateField';
 
 import {signInUser} from '../../../services/firebase';
+import httpRequest from '../../../utilities/httpRequest';
 
 class Login extends Component{
 
@@ -39,9 +40,18 @@ class Login extends Component{
 
        const{ formValues, addUser } = this.props;
        signInUser(formValues.email, formValues.password)
-         .then( (user) => {
-             this.props.history.push('/')
-             addUser(user)
+         .then( () => {
+             this.props.history.push('/');
+
+            //  const stringUserId = JSON.stringify({userId: authdUser.uid });
+            //  httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
+            //    .then((savedUser) =>{
+            //        //addUser(authdUser, savedUser)
+            //    })
+            //    .catch(error =>{
+            //      console.log(error)
+            //    })
+
          })
          .catch((error)=>{
             var errorCode = error.code;

@@ -25,12 +25,12 @@ export function addFieldError(name, value){
 }
 
 export function loadSavedValues(values){
-  const valuesObj = JSON.parse(values)
-  
+  //const valuesObj = JSON.parse(values)
+
    return {
      type: LOAD_SAVED_VALUES,
      payload:{
-        valuesObj
+        values
      }
    }
 }

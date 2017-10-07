@@ -55,24 +55,26 @@ class Welcome extends Component{
            const {formValues, clearFormField} = this.props;
            createUserAccount(formValues.email, formValues.password)
            .then((user)=>{
-               user.updateProfile({
-                 displayName: formValues.fullname,
-                 username: formValues.username
-               })
-               console.log(user)
-               const stringSignUpDetails = JSON.stringify(
-                 {
-                   ...formValues,
-                   email:  user.email,
-                   userId: user.uid
+                 this.props.history.push('/');
+
+                 user.updateProfile({
+                   displayName: formValues.fullname,
+                   username: formValues.username
                  })
 
-                 httpRequest('POST','http://127.0.0.1:3030/users', stringSignUpDetails )
-                 .then(response => {
-                    console.log(response)
-                 })
+                 const stringSignUpDetails = JSON.stringify(
+                   {
+                     ...formValues,
+                     email:  user.email,
+                     userId: user.uid
+                   })
 
-                 clearFormField();
+                   httpRequest('POST','http://127.0.0.1:3030/users', stringSignUpDetails )
+                       .then(response => {
+                           clearFormField();
+                       })
+
+                  
 
               })
             .catch((error)=>{

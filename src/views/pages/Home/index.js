@@ -19,44 +19,55 @@ class Home extends Component {
   }
   componentDidMount(){
      getSignedInUser()
-       .then(user => {
-           console.log(user)
-          const stringUserId = JSON.stringify({userId: user.uid });
+       .then((authdUser) => {
+         console.log(authdUser)
+          const stringUserId = JSON.stringify({userId: authdUser.uid });
 
-          httpRequest('GET','http://localhost:3030/tweet?UserId=' + stringUserId)
-             .then( response =>{
-               console.log(response)
-                let userPosts = JSON.parse(response);
-                for  (var post in userPosts){
-                  const userPost= userPosts[post];
-                  console.log(userPost)
-                  this.props.loadSavedPosts(userPost);
-                }
+          httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
+             .then( savedUser =>{
+
+                 this.props.addUser(authdUser, savedUser)
+
+                 httpRequest('GET','http://localhost:3030/tweet?UserId=' + stringUserId)
+                   .then((userPostsString) =>{
+
+                       let userPosts = JSON.parse(userPostsString);
+                       for  (var post in userPosts){
+                          const userPost= userPosts[post];
+                          this.props.loadSavedPosts(userPost);
+                       }
+
+                   })
+                   .catch(error=>{
+                      console.log(error)
+                   })
              })
              .catch(error =>{
                console.log(error)
              })
        })
        .catch( error =>{
-         console.log(error)
+         this.props.history.push('/login');
        })
 
   }
 
   render() {
     const{posts, user} = this.props;
+    console.log(user)
     const postArray =[];
     for (var post in posts){
       if(posts.hasOwnProperty(post) && posts[post].text !==''){
          postArray.push(
            <Post key= {`post_${postArray.length + 1}`}
                  text= {posts[post].text}
-                 displayName= {user.displayName} />
+                 displayName= {user.displayName}
+                 username= {user.username} />
          )
       }
     }
     return (
-       <Main>
+       <Main user= {user}>
           <div className='home-wrap'>
              <div className='post-container'>
                  {
@@ -74,7 +85,7 @@ function Post(props){
     <div className='post-wrap'>
        <div className='post-avatar'>?</div>
        <div className='post-text-wrap'>
-          <div className='post-username'>{props.displayName} <span> @CHICHI </span></div>
+          <div className='post-username'>{props.displayName} <span> @{props.username}</span></div>
           <div className='post-text'> {props.text} </div>
           <div className='post-retweet'>retweet?</div>
        </div>

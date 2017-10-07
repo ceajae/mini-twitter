@@ -16,6 +16,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "package-functions": "babel 'functionsES6' --out-dir 'functions' --presets=es2015 --copy-files --ignore 'node_modules'"
+  },
+  "main": "index.js",
+  "author": "Chijioke <chijiokemolokwu@gmail.com>",
+  "license": "MIT"
 }

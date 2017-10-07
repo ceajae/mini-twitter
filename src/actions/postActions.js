@@ -22,7 +22,6 @@ export function addPost(text,postId,userId,timeStamp){
 }
 
 export function loadSavedPosts(post, text, postId, userId, timeStamp){
-  console.log(post)
     text = post.text;
     postId= post._id;
     userId= post.userId;

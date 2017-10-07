@@ -39,7 +39,6 @@ const initialState ={
 export default function Posts(state = initialState, action){
   switch(action.type){
     case ADD_POST:
-        console.log(action.payload)
         return{
                posts: addPost(state.posts, action.payload)
             }
@@ -47,7 +46,6 @@ export default function Posts(state = initialState, action){
       break;
 
       case LOAD_SAVED_POSTS:
-          console.log(action.payload)
           return{
                  posts: addPost(state.posts, action.payload)
               }

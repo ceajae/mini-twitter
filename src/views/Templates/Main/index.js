@@ -11,26 +11,58 @@ import Modal from '../../../components/Modal';
 
 import firebase from '../../../configuration/firebase';
 import {signOutUser} from '../../../services/firebase';
-import httpRequest from '../../../utilities/httpRequest'
+import httpRequest from '../../../utilities/httpRequest';
+import {getSignedInUser} from '../../../services/firebase';
 
 
 
  class Main extends Component{
 
   componentDidMount(){
-     firebase.auth().onAuthStateChanged((user) => {
-       if(user) {
-         console.log(user)
-         this.props.addUser(user)
-       }else{
-          this.props.history.push('/login');
-       }
-     })
+    // getSignedInUser()
+    //   .then((authdUser) => {
+    //     console.log(authdUser)
+    //      const stringUserId = JSON.stringify({userId: authdUser.uid });
+    //
+    //      httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
+    //         .then( savedUser =>{
+    //
+    //             this.props.addUser(authdUser, savedUser)
+    //
+    //             httpRequest('GET','http://localhost:3030/tweet?UserId=' + stringUserId)
+    //               .then((userPostsString) =>{
+    //
+    //                   let userPosts = JSON.parse(userPostsString);
+    //                   for  (var post in userPosts){
+    //                      const userPost= userPosts[post];
+    //                      this.props.loadSavedPosts(userPost);
+    //                   }
+    //
+    //               })
+    //               .catch(error=>{
+    //                  console.log(error)
+    //               })
+    //         })
+    //         .catch(error =>{
+    //           console.log(error)
+    //         })
+    //   })
+    //   .catch( error =>{
+    //      this.props.history.push('/login')
+    //   })
+
+    //  firebase.auth().onAuthStateChanged((user) => {
+    //    if(user) {
+    //      this.props.addUser(user)
+    //    }else{
+    //       this.props.history.push('/login');
+    //    }
+    //  })
    }
 
    render() {
+      const { user, tweetValue, modalVisible, count, displayName} = this.props;
 
-      const { user, tweetValue, modalVisible, count} = this.props;
          return (
             <div className='mainTemplate'>
                <Header>
@@ -42,7 +74,7 @@ import httpRequest from '../../../utilities/httpRequest'
 
                    <Button text='Talk Am'
                            onClick={this._handleOpenTweetBox.bind(this)}/>
-                   <Menu label= {user.displayName} signOut= {signOutUser} />
+                   <Menu label={user.displayName} signOut= {signOutUser} />
 
                </Header>
 
@@ -91,7 +123,7 @@ import httpRequest from '../../../utilities/httpRequest'
 
         const stringPost = JSON.stringify({
           text:this.props.tweetValue,
-          userId: this.props.user.uid
+          userId: this.props.user.userId
         });
 
         httpRequest('POST','http://localhost:3030/tweet', stringPost)

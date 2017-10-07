@@ -12,7 +12,7 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return{
-      addUser:(user)=> dispatch(addUser(user)),
+      addUser:(authdUser, savedUser)=> dispatch(addUser(authdUser, savedUser)),
       addFieldError:(name,value)=>dispatch(addFieldError(name, value)),
       updateFormField:(name, value)=>dispatch(updateFormField(name, value))
   }

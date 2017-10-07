@@ -39,7 +39,6 @@ export function signOutUser (){
      try{
        firebase.auth().signOut()
         .then( ()=>{
-           console.log('signed out')
            resolve()
         })
         .catch( error =>{
@@ -55,7 +54,6 @@ export function getSignedInUser(){
   return new Promise ((resolve, reject) => {
     try{
       firebase.auth().onAuthStateChanged(function(user) {
-         console.log(user)
          if (user) {
             resolve(user)
          }

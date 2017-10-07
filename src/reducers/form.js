@@ -20,7 +20,7 @@ function updateValue(values, payload){
 function loadSavedValues(values, payload){
   return{
     ...values,
-    ...payload.valuesObj
+    ...payload.values
   }
 
 }

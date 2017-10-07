@@ -4,15 +4,21 @@ const initialState={
    user:{}
 }
 
+function newUserObj(state, payload){
+   return{
+     ...payload.savedUser_Obj,
+     displayName: payload.authdUser.displayName
+   }
+}
+
 export default function User(state = initialState, action){
 
   switch(action.type){
 
     case ADD_USER:
-        console.log(action.payload.user)
         return{
              ...state,
-             user: action.payload.user
+             user: newUserObj(state, action.payload)
             }
       break;
     default:

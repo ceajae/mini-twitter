@@ -6,23 +6,36 @@ import container from './container';
 import handleUpdateField from '../../../utilities/handleUpdateField';
 import Button from '../../../components/Button/';
 import httpRequest from '../../../utilities/httpRequest';
+import {getSignedInUser} from '../../../services/firebase';
 
 
 class Profile extends Component {
+  componentDidMount(){
+       getSignedInUser()
+         .then((authdUser) => {
 
-  componentWillMount(){
+            const stringUserId = JSON.stringify({userId: authdUser.uid });
+            
+            httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
+               .then( savedUser =>{
+                 this.props.addUser(authdUser, savedUser)
+                 this.props.loadSavedValues(this.props.user)
+                })
+               .catch(error =>{
+                   console.log(error)
+               })
+         })
+         .catch( error =>{
+           console.log(error)
+           this.props.history.push('/login');
+         })
 
-    httpRequest('GET','http://localhost:3030/users')
-    .then( (response) => {
-       this.props.loadSavedValues(response);
-    })
-  }
+    }
 
   render() {
-      const {formValues}=this.props;
-
+      const {formValues, user}=this.props;
     return (
-       <Main>
+       <Main user={user}>
            <div className='profile-wrap'>
               <div className= 'profile-header'>
                  My Profile
