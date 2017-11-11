@@ -23,27 +23,38 @@ class Welcome extends Component{
 
               <div className='signUpForm'>
 
-                   <InputField label='Fullname'
-                               onChange={handleUpdateField.bind(this, 'fullname')}
-                               value={formValues.fullname}/>
+                   <InputField label='Firstname'
+                               type='text'
+                               onChange={handleUpdateField.bind(this, 'firstname')}
+                               value={formValues.firstname}/>
+                   <InputField label='Lastname'
+                               type='text'
+                               onChange={handleUpdateField.bind(this, 'lastname')}
+                               value={formValues.lastname}/>
                    <InputField label='Email'
+                               type='text'
                                onChange={handleUpdateField.bind(this, 'email')}
                                value={formValues.email}/>
                    <InputField label='Username'
+                               type='text'
                                onChange={handleUpdateField.bind(this, 'username')}
                                value={formValues.username}/>
                    <InputField label='Password'
+                                type='password'
                                onChange={handleUpdateField.bind(this, 'password')}
                                value={formValues.password}/>
 
-                   <Button text='Create Account' onClick={this._handleCreateAccount.bind(this)}/>
-
+                   <div className='createButtonSignIn'>
+                       <Button text='Create Account'
+                               onClick={this._handleCreateAccount.bind(this)}/>
+                       <div className='signInLink'>
+                           <label>Already Signed Up?</label>
+                           <Link to='login' >Sign In</Link>
+                       </div>
+                   </div>
 
               </div>
-              <div className='signInLink'>
-                  <label>Already Signed Up?</label>
-                  <Link to='login' >Sign In</Link>
-              </div>
+
 
 
          </div>
@@ -58,7 +69,7 @@ class Welcome extends Component{
                  this.props.history.push('/');
 
                  user.updateProfile({
-                   displayName: formValues.fullname,
+                   displayName: formValues.firstname,
                    username: formValues.username
                  })
 
@@ -74,7 +85,7 @@ class Welcome extends Component{
                            clearFormField();
                        })
 
-                  
+
 
               })
             .catch((error)=>{

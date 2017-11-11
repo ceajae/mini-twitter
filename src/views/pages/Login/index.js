@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import './style.css';
+import Header from '../../../components/Header/';
+import {Link, withRouter} from 'react-router-dom';
 import container from './container';
 import firebase from '../../../configuration/firebase';
 
@@ -12,23 +14,35 @@ import httpRequest from '../../../utilities/httpRequest';
 
 class Login extends Component{
 
+
     render(){
       const {formValues}=this.props;
       return(
-         <div className='welcomePage'>
+         <div className='loginPage'>
+             <Header>
+                 <div className='logo-wrap'>
+                       <Link to='/'>
+                         Paroter
+                       </Link>
+                 </div>
 
-              <div className='loginHeader'>Welcome to Parot</div>
+             </Header>
 
               <div className='loginForm'>
+                   <h1>Login</h1>
 
-                   <InputField label='Email'
+                   <InputField label='EMAIL'
+                               type='text'
                                onChange={handleUpdateField.bind(this, 'email')}
                                value={formValues.email}/>
-                   <InputField label='Password'
+                   <InputField label='PASSWORD'
+                               type='password'
                                onChange={handleUpdateField.bind(this, 'password')}
                                value={formValues.password}/>
-
-                   <Button text='Login' onClick={this._handleSignIn.bind(this)}/>
+                   <div className='login'>
+                       <Link to='/passwordReset'>Forgot password?</Link>
+                       <Button className='loginButton' text='Login' onClick={this._handleSignIn.bind(this)}/>
+                   </div>
               </div>
 
          </div>
@@ -42,15 +56,6 @@ class Login extends Component{
        signInUser(formValues.email, formValues.password)
          .then( () => {
              this.props.history.push('/');
-
-            //  const stringUserId = JSON.stringify({userId: authdUser.uid });
-            //  httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
-            //    .then((savedUser) =>{
-            //        //addUser(authdUser, savedUser)
-            //    })
-            //    .catch(error =>{
-            //      console.log(error)
-            //    })
 
          })
          .catch((error)=>{

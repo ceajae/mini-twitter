@@ -13,7 +13,7 @@ export default function Menu(props){
     //    </ul>
     //  </div>
     <div className ='dropdown'>
-       <span>{props.label}</span>
+       <img src={props.user.photoUrl}/>
        <div className= 'dropdown-content'>
            <ul className='menus'>
                <li>

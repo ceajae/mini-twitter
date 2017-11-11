@@ -2,7 +2,7 @@ import {connect } from 'react-redux';
 import {updateTweet,toggleTweetBoxVisibility} from '../../../actions/tweetActions';
 import {toggleModalVisibility} from '../../../actions/modalActions';
 import {addPost} from '../../../actions/postActions';
-import {addUser} from '../../../actions/userActions';
+import {addUser,} from '../../../actions/userActions';
 
 function mapStateToProps(state, ownProps){
   return{
@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch){
       updateTweet:(value)=> dispatch(updateTweet(value)),
       toggleTweetBoxVisibility:(value)=> dispatch(toggleTweetBoxVisibility(value)),
       toggleModalVisibility:(value)=> dispatch(toggleModalVisibility(value)),
-      postTweet:(value, postId,userId,timeStamp)=> dispatch(addPost(value,postId,userId, timeStamp))
+      postTweet:(value, postId,userId,timeStamp,likedBy)=> dispatch(addPost(value,postId,userId, timeStamp, likedBy))
 
  }
 }

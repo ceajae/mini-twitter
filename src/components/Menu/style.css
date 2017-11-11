@@ -20,6 +20,11 @@
   margin-left: 60px;
   margin-right: 40px;
 }
+.dropdown img{
+  width: 60px;
+  height:60px;
+  border-radius: 50%;
+}
 
 .dropdown-content{
   display: none;

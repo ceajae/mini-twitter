@@ -4,22 +4,27 @@
 .inputField-wrap label{
    margin-bottom: 7px;
    display: block;
-   color:#14171a
+   color:#14171a;
+   font-size: 16px;
+   font-stretch: condensed;
+   font-weight: 500;
+}
+
+.inputField-wrap input:focus{
+  outline:none;
+  border: 2px solid #00a99d;
+  transition: border-color 0.4s ease-in-out
 }
 
 .inputField-wrap input{
     padding:12px;
-    width: 100%;
+    width: 300px;;
     box-sizing: border-box;
-    font-size: 16px;
-    border: 1px solid #e4e1e2;
+    font-size: 15px;
+    font-stretch: semi-expanded;
+    border: 1px solid #58d5cc;
     border-radius: 4px;
     margin-bottom: 1px;
     overflow: hidden;
     resize:none;
 }
-/*.inputField-wrap input :focus{
-  outline:none;
-  border: 2px solid #58d5cc;
-  transition: border-color 0.4s ease-in-out
-}*/

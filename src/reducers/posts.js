@@ -1,28 +1,57 @@
-import{ADD_POST, DELETE_POST, LOAD_SAVED_POSTS} from '../constants/actionTypes';
+import{ADD_POST, DELETE_POST, LOAD_SAVED_POSTS, UPDATE_LIKED_POST} from '../constants/actionTypes';
 const posts={
   post:{
      text:'',
      userId:'',
      replies:[],
      likes:0,
+     likedBy:[],
+     liked:false,
      retweets:0,
+
   }
 }
 
 function addPost(posts, post){
 
-  const {text,postId,userId,timeStamp}= post
+  const {text,postId,userId,timeStamp, likedBy,liked, likes}= post
    return {
 
      [postId]:{
            text,
            postId,
            userId,
-           timeStamp
+           timeStamp,
+           likedBy,
+           liked,
+           likes
        },
        ...posts,
 
    }
+}
+
+function updatePost(posts, payload){
+  for (var post in posts){
+     if (post === payload.post.postId){
+       let curPostId = post;
+       let likesNo = posts[curPostId].likedBy.length
+       const {text,postId,userId,timeStamp, likedBy, likes}= posts[curPostId]
+
+       return{
+         ...posts,
+         [curPostId]:{
+             text,
+             postId,
+             userId,
+             timeStamp,
+             likedBy,
+             likes: likesNo,
+             liked:payload.value
+         }
+       }
+     }
+  }
 }
 
 function deletePost(posts, postId){
@@ -51,6 +80,15 @@ export default function Posts(state = initialState, action){
               }
 
         break;
+
+      case UPDATE_LIKED_POST:
+          return{
+                 ...state,
+                 posts: updatePost (state.posts, action.payload)
+              }
+
+        break;
+
 
     case DELETE_POST:
        return{

@@ -1,6 +1,6 @@
-import{ADD_POST, DELETE_POST,LOAD_SAVED_POSTS } from '../constants/actionTypes';
+import{ADD_POST, DELETE_POST,LOAD_SAVED_POSTS, UPDATE_LIKED_POST } from '../constants/actionTypes';
 
-export function addPost(text,postId,userId,timeStamp){
+export function addPost(text,postId,userId,timeStamp, likedBy,liked){
   if(!postId){
       const post = JSON.parse(text)
       console.log(post)
@@ -8,6 +8,8 @@ export function addPost(text,postId,userId,timeStamp){
       postId= post._id;
       userId= post.userId;
       timeStamp=post.timeStamp;
+      likedBy=post.likedBy;
+      liked=post.liked;
   }
 
   return{
@@ -16,16 +18,26 @@ export function addPost(text,postId,userId,timeStamp){
         text,
         postId,
         userId,
-        timeStamp
+        timeStamp,
+        likedBy,
+        liked
     }
   }
 }
 
-export function loadSavedPosts(post, text, postId, userId, timeStamp){
+export function loadSavedPosts(post, text, postId, userId, timeStamp,likedBy,liked,likes){
     text = post.text;
     postId= post._id;
     userId= post.userId;
     timeStamp=post.timeStamp;
+    likedBy=post.likedBy;
+    liked=post.liked;
+    if(post.likedBy){
+      likes = post.likedBy.length;
+    }
+
+
+
 
     return{
       type:LOAD_SAVED_POSTS,
@@ -33,9 +45,23 @@ export function loadSavedPosts(post, text, postId, userId, timeStamp){
           text,
           postId,
           userId,
-          timeStamp
+          timeStamp,
+          likedBy,
+          liked,
+          likes
       }
     }
+}
+
+export function updateLikedPost(value, post){
+
+  return{
+    type: UPDATE_LIKED_POST,
+    payload:{
+      value,
+      post
+    }
+  }
 }
 
 export function deletePost(postId){

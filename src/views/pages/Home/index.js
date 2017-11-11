@@ -10,22 +10,32 @@ import Main from '../../Templates/Main/';
 import container from './container';
 import {getSignedInUser} from '../../../services/firebase';
 
+import Retweet from 'react-icons/lib/fa/retweet';
+import Like from 'react-icons/lib/fa/heart';
+import Reply from 'react-icons/lib/fa/comment-o';
+import Message from 'react-icons/lib/fa/envelope-o';
+import Loader from 'react-loader';
+
 
 
 
 class Home extends Component {
   constructor(props){
     super(props);
+
+    this.state ={
+      loading:true
+
+    }
   }
   componentDidMount(){
+
      getSignedInUser()
        .then((authdUser) => {
-         console.log(authdUser)
           const stringUserId = JSON.stringify({userId: authdUser.uid });
 
           httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
              .then( savedUser =>{
-
                  this.props.addUser(authdUser, savedUser)
 
                  httpRequest('GET','http://localhost:3030/tweet?UserId=' + stringUserId)
@@ -36,6 +46,7 @@ class Home extends Component {
                           const userPost= userPosts[post];
                           this.props.loadSavedPosts(userPost);
                        }
+                       this.setState({loading:false})
 
                    })
                    .catch(error=>{
@@ -47,26 +58,38 @@ class Home extends Component {
              })
        })
        .catch( error =>{
-         this.props.history.push('/login');
+         this.props.history.push('/welcome');
        })
-
+       console.log('loading false')
+    /// this.setState({ loading: false })
   }
 
   render() {
-    const{posts, user} = this.props;
-    console.log(user)
-    const postArray =[];
-    for (var post in posts){
-      if(posts.hasOwnProperty(post) && posts[post].text !==''){
-         postArray.push(
-           <Post key= {`post_${postArray.length + 1}`}
-                 text= {posts[post].text}
-                 displayName= {user.displayName}
-                 username= {user.username} />
-         )
+      const{posts, user} = this.props;
+      const{ loading } = this.state;
+      const postArray =[];
+      for (var post in posts){
+
+        if(posts.hasOwnProperty(post) && posts[post].text !==''){
+
+           postArray.push(
+               <Post key= {`post_${postArray.length + 1}`}
+                     text= {posts[post].text}
+                     liked={posts[post].liked}
+                     likes={posts[post].likes}
+                     updateUserPostLikes = {this._handleUpdateUserPostLikes.bind(this,posts[post], user)}
+                     displayName= {user.displayName}
+                     username= {user.username}
+                     profilePhoto={user.photoUrl}/>
+             )
+        }
       }
+
+    if(this.state.loading){
+      return <Loader/>
     }
     return (
+
        <Main user= {user}>
           <div className='home-wrap'>
              <div className='post-container'>
@@ -78,19 +101,69 @@ class Home extends Component {
        </Main>
     );
   }
+
+ _handleUpdateUserPostLikes(post, user){
+      let likers = post.likedBy;
+      if(likers.indexOf(user.userId) > -1){
+         var index = likers.indexOf(user.userId);
+         likers.splice(index, 1)
+      } else{
+
+            likers.push(user.userId)
+      }
+
+      const stringUserPost = JSON.stringify({
+             likedBy: likers,
+             liked: !post.liked,
+             postId: post.postId
+        })
+
+      httpRequest('POST','http://127.0.0.1:3030/tweet', stringUserPost )
+        .then( response => {
+           this.props.updateLikedPost(!post.liked, post)
+        })
+        .catch(error =>{
+          console.log(error)
+        })
+
+  }
 }
 
 function Post(props){
+
   return(
     <div className='post-wrap'>
-       <div className='post-avatar'>?</div>
+       <div className='post-avatar'><img src={props.profilePhoto}/></div>
        <div className='post-text-wrap'>
-          <div className='post-username'>{props.displayName} <span> @{props.username}</span></div>
+          <div className='post-username'>
+                <span className='displayName'>{props.displayName}</span>
+                <span className='username'> @{props.username}</span>
+          </div>
           <div className='post-text'> {props.text} </div>
-          <div className='post-retweet'>retweet?</div>
+          <div className='post-feedback'>
+             <div className='retweet-icon'>
+                  <Retweet/>
+             </div>
+
+             <div className={`like-icon ${props.liked? `liked-icon`:''}`} onClick={props.updateUserPostLikes}>
+                 <Like id='like-icon'/><span>{props.likes===0 ? '': props.likes}</span>
+             </div>
+
+             <div className='reply-icon'>
+                 <Reply/>
+             </div>
+
+             <div className='message-icon'>
+                  <Message/>
+             </div>
+          </div>
        </div>
     </div>
   );
 }
+
+
+
+
 
 export default container(Home);

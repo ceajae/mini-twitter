@@ -8,6 +8,7 @@ import Home from './views/pages/Home/';
 import Profile from './views/pages/Profile/';
 import Welcome from './views/pages/Welcome';
 import Login from './views/pages/Login';
+import PasswordReset from './views/pages/PasswordReset';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path='/login'  component={Login}/>
           <Route path ='/' component={Home} exact/>
           <Route path ='/profile' component={Profile} exact/>
+          <Route path ='/passwordReset' component={PasswordReset} exact/>
        </div>
 
     );

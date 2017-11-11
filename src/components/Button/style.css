@@ -5,14 +5,25 @@
   padding:15px 30px;
   display: inline-block;
   border-radius: 5000px;
-  transition: background-color 0.25s ease-in-out
+  transition: background-color 0.32s ease-in-out
 
 }
 
 .button:hover{
-  background-color: #018b81;
+  /*background-color: #018b81;*/
+  color: #00a99d;
+  border: 2px solid #00a99d;
+  background-color: #ffffff;
   cursor: pointer;
 }
+.button:active{
+  background-color:#00a99d ;
+  color:#ffffff;
+  transition: background-color 0.1s ease-in-out
+}
+/*.button:visited{
+  background-color: #ffffff;
+}*/
 
 .button-disabled{
   background-color: #9BC6C3;

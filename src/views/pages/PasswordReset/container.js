@@ -1,0 +1,23 @@
+import {connect } from 'react-redux';
+import {updateFormField } from '../../../actions/formActions';
+import {addFieldError, clearFormField} from '../../../actions/formActions';
+import {addUser} from '../../../actions/userActions';
+
+function mapStateToProps(state, ownProps){
+  return{
+     modalVisible: state.modal.visibility,
+     formValues: state.form.values
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+      addUser:(authdUser, savedUser)=> dispatch(addUser(authdUser, savedUser)),
+      addFieldError:(name,value)=>dispatch(addFieldError(name, value)),
+      clearFormField:()=> dispatch(clearFormField()),
+      updateFormField:(name, value)=>dispatch(updateFormField(name, value))
+  }
+ }
+
+
+export default connect(mapStateToProps, mapDispatchToProps);

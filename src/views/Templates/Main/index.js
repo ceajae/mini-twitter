@@ -18,48 +18,6 @@ import {getSignedInUser} from '../../../services/firebase';
 
  class Main extends Component{
 
-  componentDidMount(){
-    // getSignedInUser()
-    //   .then((authdUser) => {
-    //     console.log(authdUser)
-    //      const stringUserId = JSON.stringify({userId: authdUser.uid });
-    //
-    //      httpRequest('GET','http://localhost:3030/users?UserId=' + stringUserId)
-    //         .then( savedUser =>{
-    //
-    //             this.props.addUser(authdUser, savedUser)
-    //
-    //             httpRequest('GET','http://localhost:3030/tweet?UserId=' + stringUserId)
-    //               .then((userPostsString) =>{
-    //
-    //                   let userPosts = JSON.parse(userPostsString);
-    //                   for  (var post in userPosts){
-    //                      const userPost= userPosts[post];
-    //                      this.props.loadSavedPosts(userPost);
-    //                   }
-    //
-    //               })
-    //               .catch(error=>{
-    //                  console.log(error)
-    //               })
-    //         })
-    //         .catch(error =>{
-    //           console.log(error)
-    //         })
-    //   })
-    //   .catch( error =>{
-    //      this.props.history.push('/login')
-    //   })
-
-    //  firebase.auth().onAuthStateChanged((user) => {
-    //    if(user) {
-    //      this.props.addUser(user)
-    //    }else{
-    //       this.props.history.push('/login');
-    //    }
-    //  })
-   }
-
    render() {
       const { user, tweetValue, modalVisible, count, displayName} = this.props;
 
@@ -74,7 +32,8 @@ import {getSignedInUser} from '../../../services/firebase';
 
                    <Button text='Talk Am'
                            onClick={this._handleOpenTweetBox.bind(this)}/>
-                   <Menu label={user.displayName} signOut= {signOutUser} />
+
+                   <Menu  user={user} signOut= {signOutUser} />
 
                </Header>
 
@@ -103,27 +62,12 @@ import {getSignedInUser} from '../../../services/firebase';
     }
 
     _handleSubmitTweet(){
-        function generateId(){
-            const time =  Date.now().toString().split('');
-            let randomizer, letter, id='';
-
-            const alphaCodex=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-          //  const numCodex=['0','1','2','3','4','5','6','7','8','9'];
-
-            for(var i=0; i<time.length; i++){
-              randomizer = Math.floor(Math.random()*10);
-              letter = alphaCodex[ Math.floor((alphaCodex.length * randomizer)/10)];
-            //  console.log(letter);
-              id+=letter;
-            }
-
-             return id;
-
-        }
 
         const stringPost = JSON.stringify({
           text:this.props.tweetValue,
-          userId: this.props.user.userId
+          userId: this.props.user.userId,
+          likedBy:[]
+
         });
 
         httpRequest('POST','http://localhost:3030/tweet', stringPost)

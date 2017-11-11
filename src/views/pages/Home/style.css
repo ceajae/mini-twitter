@@ -4,7 +4,8 @@
   justify-content: center;
 }
 .post-container{
-  width:500px;
+  width:570px;
+  font-family: "Segoe UI",Arial,sans-serif;
 }
 .post-wrap{
   display: flex;
@@ -22,28 +23,103 @@
   text-align:center;
   font-size: 50px;
 }
+
+.post-avatar img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%
+}
 .post-text-wrap{
   display: flex;
   flex-direction: column;
   /*background-color: blue;*/
-  max-width:400px;
+  width:400px;
 }
 .post-username{
    margin:5px;
    height:20px;
 }
-.post-username span{
+.username{
   color:#737A78;
   font-size: 14px;
 }
+.displayName{
+  font-weight: bold;
+}
 .post-text{
   margin: 5px;
-  min-height:40px;
+  min-height:60px;
   font-size: 13px;
   word-wrap: break-word;
+  line-height: 20px
 }
-.post-retweet{
+.post-feedback{
   margin:5px;
   height:16px;
-  font-size: 14px;
+  display: flex;
+  justify-content:space-around;
+
+}
+.retweet-icon{
+  display: flex;
+  width: 80px;
+  height: 40px;
+  justify-content:center;
+  color:#657786;
+}
+.message-icon{
+  margin-left: 70px;
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content:center;
+  color:#657786;
+}
+.reply-icon{
+  margin-left: 70px;
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content:center;
+  color:#657786;
+}
+
+.like-icon{
+  margin-left: 70px;
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content:center;
+  color:#657786;
+  position: relative;
+  /*background-color: blue;*/
+}
+.like-icon span{
+  position: absolute;
+  top:-3px;
+  right: 3px;
+}
+.liked-icon{
+  color:#e22240;
+}
+.like-icon:hover{
+  color:#e22240;
+  cursor: pointer;
+}
+.like-icon:active{
+  color: #e0a8ad;
+  transition: color 0.1s ease-in-out
+}
+
+.retweet-icon:hover{
+  color:#2bdb34;
+  cursor: pointer;
+}
+.message-icon:hover{
+  color:#30b5e5;
+  cursor: pointer;
+}
+.reply-icon:hover{
+  color: #7a1fe2;
+  cursor:pointer;
 }

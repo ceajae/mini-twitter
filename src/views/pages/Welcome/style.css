@@ -10,24 +10,34 @@
 .signUpHeader{
   margin: 0 auto;
   text-align: center;
-  font-size: 30px;
+  font-size: 40px;
   margin-bottom: 20px;
   color: #00a99d;
   font-weight: bold;
+  margin-left: 40px;
 }
 .signUpForm{
   box-sizing: border-box;
   max-width: 300px;
-  background-color: #fcfcfc;
+  /*background-color: #fcfcfc;*/
   margin:0 auto;
   padding:20px;
   margin-bottom: 10px;
   border-radius: 20px;
 }
-.signInLink{
+
+.createButtonSignIn{
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
+  width: 300px;
   text-align: center;
+}
+.signInLink{
+  margin-top: 10px;
+  font-size: 16px;
 }
 .signInLink a{
     text-decoration: none;
+    margin-left: 10px;
 }
