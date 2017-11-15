@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^4.5.2",
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "create-react-app": "^1.4.3",
+    "create-react-class": "^15.6.2",
+    "firebase": "^4.6.2",
+    "prop-types": "^15.6.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-icons": "^2.2.7",
     "react-loader": "^2.4.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.12",
+    "react-scripts": "^1.0.12",
     "redux": "^3.7.2"
   },
   "scripts": {
@@ -23,5 +25,19 @@
   },
   "main": "index.js",
   "author": "Chijioke <chijiokemolokwu@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceajae/mini-twitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ceajae/mini-twitter/issues"
+  },
+  "homepage": "https://github.com/ceajae/mini-twitter#readme"
 }
